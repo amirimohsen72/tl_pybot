@@ -1,0 +1,9 @@
+python-telegram-bot 2.4
+
+سخت تر ولی کار های پیچیده تر
+python-telegram-bot
+
+
+
+تله بات ساده تره
+pyTelegramBotAPI 4.27.0
