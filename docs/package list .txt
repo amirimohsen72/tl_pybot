@@ -7,3 +7,13 @@ python-telegram-bot
 
 تله بات ساده تره
 pyTelegramBotAPI 4.27.0
+
+
+
+///// متفرقه :
+pip install runflare
+pip install django
+pip install mysql-connector-python
+pip install instapy
+pip install boto3
+

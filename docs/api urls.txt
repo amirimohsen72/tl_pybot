@@ -1,0 +1,12 @@
+https://api.telegram.org/bot<token>/getMe
+
+
+METHOD_NAME :
+getMe
+getUpdates
+sendMessage  : ?chat_id=74548122&text=hi
+sendPhoto?chat_id=74548122&photo=https://a.ir/A.png&caption=send by url image
+
+
+
+
