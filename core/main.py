@@ -12,14 +12,19 @@ bot = telebot.TeleBot(API_TOKEN)
 @bot.message_handler(['action'], func = lambda message:True)
 def keyboard_shishee(message):
     markup= telebot.types.InlineKeyboardMarkup()
-    button1= telebot.types.InlineKeyboardButton('کلید1',url='https://tihoopharma.ir')
-    button2= telebot.types.InlineKeyboardButton('کلید2',url='https://t.me/rafanet')
-    button3= telebot.types.InlineKeyboardButton('کلید3',url='https://t.me/rafanet')
+    button1= telebot.types.InlineKeyboardButton('سایت',url='https://tihoopharma.ir')
+    button2= telebot.types.InlineKeyboardButton('کلید2',callback_data='testcall')
+    button3= telebot.types.InlineKeyboardButton('کلید3',callback_data='test2')
     markup.add(button1)
     markup.add(button2,button3)
     bot.send_message(message.chat.id,'عملیات را انتخاب کنید',reply_markup=markup)
      
-
+@bot.callback_query_handler(func=lambda call:True)
+def testcallfunction(call):
+    if call.data == 'testcall' :
+        bot.send_message(call.message.chat.id,call.data)
+    elif call.data == 'test2' :
+        bot.send_message(call.message.chat.id,'ressspns')
 
 # @bot.message_handler(content_types=['voice','document'])
 @bot.message_handler()
