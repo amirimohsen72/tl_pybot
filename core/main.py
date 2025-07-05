@@ -10,6 +10,7 @@ print(API_TOKEN)
 bot = telebot.TeleBot(API_TOKEN)
 
 # @bot.message_handler(['command1','command2'])
+# @bot.message_handler(content_types=['voice','document'])
 @bot.message_handler()
 def send_wellcome(message):
     if message.text == 'start' :
