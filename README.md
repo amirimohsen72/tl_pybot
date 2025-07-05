@@ -17,3 +17,8 @@ def send_wellcome(message):
     if message.text == 'start' :
         bot.send_message(message.chat.id,'خوش آمدید')
 
+send file:
+bot.send_document(message.chat.id,file)
+
+reply to message:
+bot.reply_to(message, 'پیام دریافت شد ')
