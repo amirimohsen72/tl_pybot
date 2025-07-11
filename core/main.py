@@ -1,5 +1,9 @@
 import telebot
 import os
+import sqlite3
+
+MAIN_DB = sqlite3.connect('test_db.db',check_same_thread=False)
+MAIN_CURSOR = MAIN_DB.cursor()
 
 dir = os.path.dirname(os.path.abspath(__file__))
 # file_path = os.path.join(dir, "test.txt")
