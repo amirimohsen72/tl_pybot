@@ -33,3 +33,16 @@ bot.send_location(message.chat.id,lat,lon)
 file_info = bot.get_file(message.photo[-1].file_id)
 bot.download_file(file_info.file_path)
 سپس در پایتون فایل دانلود را در یک فایل ذخیره میکنیم.
+
+کلید های شیشه ای
+    markup= telebot.types.InlineKeyboardMarkup()
+    button1= telebot.types.InlineKeyboardButton('سایت',url='https://google.com')
+    markup.add(button1)
+    bot.send_message(message.chat.id,'عملیات را انتخاب کنید',reply_markup=markup)
+
+
+کلید های کیوورد
+(فقط متن روی دکمه را ارسال میکند)
+    markup= telebot.types.ReplyKeyboardMarkup().add('تست1')
+    bot.send_message(message.chat.id,'عملیات را انتخاب کنید',reply_markup=markup)
+
