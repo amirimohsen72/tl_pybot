@@ -7,9 +7,11 @@ MAIN_CURSOR = MAIN_DB.cursor()
 
 
 MAIN_CURSOR.execute(
-    '''CREATE TABLE table_name (
-    chatid varchar(255),
-    amount int(20),
+    '''CREATE TABLE users (
+    chat_id varchar(300),
+    age varchar(20),
+    name varchar(300),
+    last_name varchar(300),
     status varchar(255)
 );'''
 )

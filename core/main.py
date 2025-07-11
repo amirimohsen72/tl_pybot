@@ -15,18 +15,26 @@ bot = telebot.TeleBot(API_TOKEN)
 
 @bot.message_handler(['start'], func = lambda message:True)
 def keyboard_keyword(message):
+    MAIN_CURSOR.execute("select * from users where chat_id = '"+ str(message.chat.id) +"'")
+    result = MAIN_CURSOR.fetchone()
+    if result :
+        msg = "سلام . عملیات را انتخاب کنید"
+    else:
+        MAIN_CURSOR.execute("insert into users (chat_id , status) values ('"+ str(message.chat.id) + "','start')")
+        MAIN_DB.commit()
+        msg = 'ثبت نام موفق . چه کمکی ازم بر میاد ؟'
     # markup= telebot.types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=4,input_field_placeholder='از دکمه کیورد شورتکات انتخاب نمایید', one_time_keyboard=True).add('تست1')
     markup= telebot.types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=4,input_field_placeholder='از دکمه کیورد شورتکات انتخاب نمایید', one_time_keyboard=True)
     markup.add('حذف کیوورد')
-    markup.add('mahsol1','mahsol2')
-    bot.send_message(message.chat.id,'عملیات را انتخاب کنید',reply_markup=markup)
+    markup.add('mahsol1','نمایش اطلاعات من')
+    bot.send_message(message.chat.id,msg,reply_markup=markup)
 
 @bot.message_handler(['action'], func = lambda message:True)
 def keyboard_shishee(message):
     markup= telebot.types.InlineKeyboardMarkup()
     button1= telebot.types.InlineKeyboardButton('سایت',url='https://tihoopharma.ir')
     button2= telebot.types.InlineKeyboardButton('کلید2',callback_data='testcall')
-    button3= telebot.types.InlineKeyboardButton('کلید3',callback_data='test2')
+    button3= telebot.types.InlineKeyboardButton('تکمیل نام',callback_data='name_update')
     markup.add(button1)
     markup.add(button2,button3)
     bot.send_message(message.chat.id,'عملیات را انتخاب کنید',reply_markup=markup)
@@ -35,8 +43,10 @@ def keyboard_shishee(message):
 def testcallfunction(call):
     if call.data == 'testcall' :
         bot.send_message(call.message.chat.id,call.data)
-    elif call.data == 'test2' :
-        bot.send_message(call.message.chat.id,'ressspns')
+    elif call.data == 'name_update' :
+        MAIN_CURSOR.execute("update users set  name ='amir' , status='name' where chat_id='"+ str( call.message.chat.id) + "'")
+        MAIN_DB.commit()
+        bot.send_message(call.message.chat.id,'status name')
 
 # @bot.message_handler(content_types=['voice','document'])
 @bot.message_handler()
@@ -49,6 +59,12 @@ def send_wellcome(message):
 
     elif message.text == 'حذف کیوورد'  :
         bot.send_message(message.chat.id,'شروع مجدد', reply_markup=telebot.types.ReplyKeyboardRemove())
+
+    elif message.text == 'نمایش اطلاعات من'  :
+        MAIN_CURSOR.execute("select * from users where chat_id='"+str(message.chat.id)+"'")
+        user = MAIN_CURSOR.fetchone()
+        jsdc = str(user[2] + ' ' + ' status :' + user[4])
+        bot.send_message(message.chat.id,jsdc)
 
     elif message.text.startswith('file')  :
         # with open('testfile.txt','rb') as file:
