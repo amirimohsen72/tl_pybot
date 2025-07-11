@@ -13,7 +13,7 @@ bot = telebot.TeleBot(API_TOKEN)
 def keyboard_keyword(message):
     # markup= telebot.types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=4,input_field_placeholder='از دکمه کیورد شورتکات انتخاب نمایید', one_time_keyboard=True).add('تست1')
     markup= telebot.types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=4,input_field_placeholder='از دکمه کیورد شورتکات انتخاب نمایید', one_time_keyboard=True)
-    markup.add('تست1')
+    markup.add('حذف کیوورد')
     markup.add('mahsol1','mahsol2')
     bot.send_message(message.chat.id,'عملیات را انتخاب کنید',reply_markup=markup)
 
@@ -42,6 +42,9 @@ def send_wellcome(message):
 
     elif message.text.startswith('سلام') or message.text.startswith('hi') :
         bot.send_message(message.chat.id,'علیک سلام')
+
+    elif message.text == 'حذف کیوورد'  :
+        bot.send_message(message.chat.id,'شروع مجدد', reply_markup=telebot.types.ReplyKeyboardRemove())
 
     elif message.text.startswith('file')  :
         # with open('testfile.txt','rb') as file:
